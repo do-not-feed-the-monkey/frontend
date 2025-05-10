@@ -15,10 +15,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'events-list',
-  imports: [CommonModule, FormsModule, EventDetailsComponent, 
+  imports: [ FormsModule, EventDetailsComponent, 
     TableModule, TagModule, ToastModule, HttpClientModule,
     RatingModule,CheckboxModule, ButtonModule, 
     ],
+    standalone:true,
   templateUrl: './events-list.component.html',
   styleUrls: ['./events-list.component.css'],
 })

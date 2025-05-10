@@ -23,14 +23,14 @@ export class EventDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initChart();
-
+    // this.initChart();
+    console.log('NARAZIE NIC')
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.eventDetails = this.eventsService.getEventDetailsById(this.event.id).subscribe({
-      next: (data) => this.details = data,
-      error: (err) => console.error('No events', err)
-    });
+    // this.eventDetails = this.eventsService.getEventDetailsById(this.event.id).subscribe({
+    //   next: (data) => this.details = data,
+    //   error: (err) => console.error('No events', err)
+    // });
   }
 
   initChart() {

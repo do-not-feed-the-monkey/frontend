@@ -1,7 +1,7 @@
 <div class="card">
+  
   <p-table
   [value]="events"
-
   dataKey="id"
   [tableStyle]="{ 'min-width': '60rem' }"
   [expandedRowKeys]="expandedRows"
@@ -48,7 +48,7 @@
   </ng-template>
 
   <!-- Rozszerzony wiersz -->
-  <ng-template pTemplate="rowexpansion" let-event>
+  <ng-template #expandedrow let-event>
     <event-details [event]="event"></event-details>
 
     <ng-template pTemplate="emptymessage">
