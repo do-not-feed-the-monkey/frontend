@@ -4,7 +4,7 @@ import { providePrimeNG } from 'primeng/config';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import Aura from '@primeng/themes/aura';
+import { Aura } from '@primeng/themes/aura';  // Pamiętaj, aby prawidłowo zaimportować temat
 
 export const appConfig: ApplicationConfig = {
     providers: [

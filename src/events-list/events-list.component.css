@@ -1,0 +1,4 @@
+::ng-deep .acknowledged-row {
+    opacity: 0.5;
+    pointer-events: none;
+  }

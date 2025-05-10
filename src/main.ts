@@ -1,6 +1,12 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+import { CommonModule } from '@angular/common'; // Konieczne dla dyrektyw Angulara
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  // imports:[CommonModule, HttpClientModule],
+  providers: [
+    MessageService, // Dodajemy MessageService
+  ]
+});

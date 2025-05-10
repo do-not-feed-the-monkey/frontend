@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, Input, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { EventsService } from '../events.service';
 import { isPlatformBrowser } from '@angular/common';
-import { ChartModule } from 'primeng/chart';
+// import { ChartModule } from 'primeng/chart';
 
 @Component({
   selector: 'event-details',
-  imports: [ChartModule],
+  // imports: [ChartModule],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.css'
 })
