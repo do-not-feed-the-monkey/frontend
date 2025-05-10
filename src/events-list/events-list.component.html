@@ -1,28 +1,46 @@
 <div class="card">
-  <p-table
-      [value]="events"
-      [paginator]="true"
-      [rows]="5"
-      [tableStyle]="{ 'min-width': '50rem' }"
-      [rowsPerPageOptions]="[5, 10, 20]"
-  >
+  <p-toast />
+  <p-table [value]="events" dataKey="id" [tableStyle]="{ 'min-width': '60rem' }" [expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
+
       <ng-template #header>
           <tr>
-              <th style="width:25%">Tytuł</th>
-              <th style="width:25%">Czas</th>
-              <th style="width:25%">Miejscowość</th>
-              <th style="width:25%">Wydarzenie</th>
-              <th style="width:25%">Status</th>
+              <th style="width: 5rem"></th>
+              <th pSortableColumn="name">Tytuł <p-sortIcon field="name" /></th>
+              <th>Czas</th>
+              <th pSortableColumn="price">Lokacja <p-sortIcon field="price" /></th>
+              <th pSortableColumn="category">Wydarzenie <p-sortIcon field="category" /></th>
+              <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus" /></th>
           </tr>
       </ng-template>
-      <ng-template #body let-event>
+      <ng-template #body let-event let-expanded="expanded">
           <tr>
-              <td>{{ event?.name }}</td>
-              <td>{{ event?.timeCreation }}</td>
-              <td>{{ event?.location }}</td>
-              <td>{{ event?.text }}</td>
-              <td><input type="checkbox"><label>Ack</label></td>
+              <td>
+                  <p-button type="button" pRipple [pRowToggler]="event" [text]="true" [rounded]="true" [plain]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+              </td>
+              <td>{{ event.title }}</td>
+              <td>{{ event.createdAt }}</td>
+              <td>{{ event.description }}</td>
+              <!-- <td><p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false" /></td> -->
+              <td>
+                Severity
+                  <!-- <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)" /> -->
+              </td>
+              <td>
+                <button>
+
+                </button></td>
           </tr>
+      </ng-template>
+      <ng-template #expandedrow let-event>
+          <event-details [event]="event" *ngIf=""></event-details>
+          
+        <label>Hello world</label>
+      
+          <ng-template  #emptymessage>
+            <tr>
+                <td colspan="6">There are no details for this event yet.</td>
+            </tr>
+        </ng-template>
       </ng-template>
   </p-table>
 </div>

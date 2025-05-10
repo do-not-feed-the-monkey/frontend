@@ -2,24 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Przykładowy interfejs (typ obiektu, który spodziewasz się otrzymać)
 export interface Events {
-  id: number;
-  name: string;
-  timeCreation: string;
+  id?: number;
+  name?: string;
+  timeCreation?: string;
+  items: any[];
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
-
-  private apiUrl = 'https://api.example.com/events';
+// 134.199.189.23/api/events
+  // private apiUrl = 'https://api.example.com/events';
+  private apiUrl = 'http://134.199.189.23/api/events';
 
   constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<Event[]> {
-    return this.http.get<Events[]>(this.apiUrl);
+  // getEvents(): Observable<Events[]> {
+  //   return this.http.get<Events[]>(this.apiUrl);
+  // }
+
+  getEvents(): Observable<any>{// Events[]> {
+    return this.http.get<Events[]>('/api/events');
   }
 
   getEventDetailsById(id: number): Observable<Events> {
