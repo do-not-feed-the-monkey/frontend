@@ -1,0 +1,28 @@
+<div class="card">
+  <p-table
+      [value]="events"
+      [paginator]="true"
+      [rows]="5"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [rowsPerPageOptions]="[5, 10, 20]"
+  >
+      <ng-template #header>
+          <tr>
+              <th style="width:25%">Tytuł</th>
+              <th style="width:25%">Czas</th>
+              <th style="width:25%">Miejscowość</th>
+              <th style="width:25%">Wydarzenie</th>
+              <th style="width:25%">Status</th>
+          </tr>
+      </ng-template>
+      <ng-template #body let-event>
+          <tr>
+              <td>{{ event?.name }}</td>
+              <td>{{ event?.timeCreation }}</td>
+              <td>{{ event?.location }}</td>
+              <td>{{ event?.text }}</td>
+              <td><input type="checkbox"><label>Ack</label></td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
