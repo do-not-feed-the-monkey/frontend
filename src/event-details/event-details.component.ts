@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, Input, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { EventsService } from '../events.service';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 // import { ChartModule } from 'primeng/chart';
 
 @Component({
   selector: 'event-details',
-  // imports: [ChartModule],
+  imports: [CommonModule],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.css'
 })
@@ -27,10 +27,14 @@ export class EventDetailsComponent implements OnInit {
     console.log('NARAZIE NIC')
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    // this.eventDetails = this.eventsService.getEventDetailsById(this.event.id).subscribe({
-    //   next: (data) => this.details = data,
-    //   error: (err) => console.error('No events', err)
-    // });
+    this.eventDetails = this.eventsService.getEventDetailsById(this.event.id).subscribe({
+      next: (data) => this.eventDetails = data,
+      error: (err) => console.error('No event', err)
+    });
+  }
+
+  sendRequest() {
+    this.eventsService.sendEmptyPost(this.event.id);
   }
 
   initChart() {

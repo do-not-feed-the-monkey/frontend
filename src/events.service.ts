@@ -28,6 +28,11 @@ export class EventsService {
   }
 
   getEventDetailsById(id: number): Observable<Events> {
-    return this.http.get<Events>(`${this.apiUrl}/${id}`);
+    return this.http.get<Events>(`/api/events/${id}`);
+  }
+
+  sendEmptyPost(id: number) {
+    return this.http.post<Events>(`/api/events/${id}`, {});
   }
 }
+// {id}/ack

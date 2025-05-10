@@ -23,8 +23,8 @@
   </ng-template>
 
   <!-- Wiersze tabeli -->
-  <ng-template pTemplate="body" let-event let-expanded="expanded">
-    <tr >
+  <ng-template pTemplate="body" let-event let-expanded="expanded" >
+    <tr>
       <td>
         <p-button
           type="button"
@@ -36,11 +36,11 @@
           [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
         />
       </td>
-      <td>{{ event.weight }}</td>
-      <td>{{ event.title }}</td>
-      <td>{{ event.createdAt }}</td>
-      <td>{{ event.location }}</td>
-      <td>{{ event.description }}</td>
+      <td [ngClass]="{ 'acknowledged-row': event.acknowledged }">{{ event.weight }}</td>
+      <td [ngClass]="{ 'acknowledged-row': event.acknowledged }">{{ event.title }}</td>
+      <td [ngClass]="{ 'acknowledged-row': event.acknowledged }">{{ event.createdAt }}</td>
+      <td [ngClass]="{ 'acknowledged-row': event.acknowledged }">{{ event.location }}</td>
+      <td [ngClass]="{ 'acknowledged-row': event.acknowledged }">{{ event.description }}</td>
       <td>
         <p-checkbox [(ngModel)]="event.acknowledged" [binary]="true" />
       </td>
@@ -48,14 +48,8 @@
   </ng-template>
 
   <!-- Rozszerzony wiersz -->
-  <ng-template #expandedrow let-event>
+  <ng-template pTemplate="expandedRow" let-event>
     <event-details [event]="event"></event-details>
-
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="7">There are no details for this event yet.</td>
-      </tr>
-    </ng-template>
   </ng-template>
 </p-table>
 </div>

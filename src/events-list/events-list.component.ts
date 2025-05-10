@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'events-list',
-  imports: [ FormsModule, EventDetailsComponent, 
+  imports: [ CommonModule, FormsModule, EventDetailsComponent, 
     TableModule, TagModule, ToastModule, HttpClientModule,
     RatingModule,CheckboxModule, ButtonModule, 
     ],
@@ -40,13 +40,13 @@ export class EventsListComponent implements OnInit {
     });
   }
 
-  expandAll() {
-    this.expandedRows = this.events.reduce((acc: { [x: string]: boolean }, p: { id: string | number }) => (acc[p.id] = true) && acc, {});
-  }
+  // expandAll() {
+  //   this.expandedRows = this.events.reduce((acc: { [x: string]: boolean }, p: { id: string | number }) => (acc[p.id] = true) && acc, {});
+  // }
 
-  collapseAll() {
-    this.expandedRows = {};
-  }
+  // collapseAll() {
+  //   this.expandedRows = {};
+  // }
 
   onRowExpand(event: TableRowExpandEvent) {
     console.log('onRowExpand');
