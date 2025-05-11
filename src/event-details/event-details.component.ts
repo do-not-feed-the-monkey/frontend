@@ -1,15 +1,17 @@
-import { ChangeDetectorRef, Component, Input, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
 import { EventsService } from '../events.service';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 // import { ChartModule } from 'primeng/chart';
+import { CardModule } from 'primeng/card';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'event-details',
-  imports: [CommonModule],
+  imports: [CommonModule, CardModule],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.css'
 })
-export class EventDetailsComponent implements OnInit {
+export class EventDetailsComponent implements OnInit, AfterViewInit {
   @Input() event: any;
   eventDetails: any;
   options: any;
@@ -31,6 +33,19 @@ export class EventDetailsComponent implements OnInit {
       next: (data) => this.eventDetails = data,
       error: (err) => console.error('No event', err)
     });
+  }
+
+  ngAfterViewInit(): void {
+    const map = L.map('map').setView([52.2297, 21.0122], 13); // Warszawa (mockowana lokalizacja)
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([52.2297, 21.0122])
+      .addTo(map)
+      .bindPopup('Mockowane zdarzenie w Warszawie')
+      .openPopup();
   }
 
   sendRequest() {

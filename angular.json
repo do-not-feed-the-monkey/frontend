@@ -27,8 +27,8 @@
               }
             ],
             "styles": [
-          
-              "node_modules/primeicons/primeicons.css"
+              "node_modules/leaflet/dist/leaflet.css",
+              "src/styles.css"
             ],
             "scripts": []
           },

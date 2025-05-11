@@ -1,4 +1,10 @@
-::ng-deep .acknowledged-row {
+.acknowledged-row {
     opacity: 0.5;
     pointer-events: none;
   }
+
+  tbody tr:hover {
+    background-color: #98e7d6; /* lub dowolny kolor */
+    cursor: pointer;
+  }
+  

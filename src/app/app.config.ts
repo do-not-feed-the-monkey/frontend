@@ -34,13 +34,17 @@ import { RatingModule } from 'primeng/rating';
 
 // Motyw z @primeng/themes
 import Aura from '@primeng/themes/aura';
+import { DatePickerModule } from 'primeng/datepicker';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Aura
+        preset: Aura,
+        options: {
+          darkModeSelector: '.my-app-dark'
+        }
       }
     }),
     importProvidersFrom(

@@ -1,14 +1,23 @@
-<div class="card">
-    
+<div >
+  <p-card header="{{ event.title }}" subheader="Utworzono: {{ event.createdAt }}">
+    <ng-template pTemplate="content">
+      <p><strong>Severity:</strong> {{ event.severity }}</p>
+      <p><strong>Opis:</strong> {{ event.description }}</p>
+      <p><strong>Lokalizacja:</strong> {{ event.location }}</p>
+    </ng-template>
+  </p-card>
+
+  <div class="map-container">
+    <div id="map" style="height: 400px;width: 400px;"></div>
+  </div>
+ 
         <!-- <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]" /> -->
-        <button (click)="sendRequest()"></button>
-        <pre>{{ event | json }}</pre>
+        <!-- <button (click)="sendRequest()"></button> -->
+     
 
     
  
-<!-- <div *ngIf="!event?">
-  <p>There are no details for this event yet.</p>
-</div> -->
+
 
 </div>
 

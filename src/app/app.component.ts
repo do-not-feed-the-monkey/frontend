@@ -6,11 +6,12 @@ import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { EventsService } from '../events.service';
 import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [DashboardComponent,
+  imports: [DashboardComponent, ButtonModule,
     CommonModule,     // Dodajemy CommonModule
     HttpClientModule, // Dodajemy HttpClientModule
     TableModule,

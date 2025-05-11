@@ -1,0 +1,11 @@
+.map-container {
+    margin-top: 15px;
+    display: flex;              /* Używamy Grid */
+    justify-content: center;       /* Wyśrodkowanie zarówno poziome, jak i pionowe */              /* Ustawiamy wysokość na 100% widocznej wysokości ekranu */
+  }
+  
+  #map {
+    width: 80%;                 /* Szerokość mapy (możesz dostosować) */
+    height: 400px;              /* Wysokość mapy (możesz dostosować) */
+  }
+  

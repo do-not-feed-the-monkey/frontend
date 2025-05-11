@@ -12,21 +12,31 @@ import { ToastModule } from 'primeng/toast';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { Dialog } from 'primeng/dialog';
 
 @Component({
   selector: 'events-list',
   imports: [ CommonModule, FormsModule, EventDetailsComponent, 
     TableModule, TagModule, ToastModule, HttpClientModule,
-    RatingModule,CheckboxModule, ButtonModule, 
+    RatingModule,CheckboxModule, ButtonModule, Dialog
     ],
     standalone:true,
   templateUrl: './events-list.component.html',
   styleUrls: ['./events-list.component.css'],
 })
 export class EventsListComponent implements OnInit {
-  events!: IEvent[];
-  expandedRows: any = {};
+  // events!: IEvent[];
+  // expandedRows: { [key: string]: boolean } = {};
+  events: any = [];
   detailsOpen: boolean = false;
+
+  expandedRows: Set<number> = new Set();
+  sortField: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+  visible: boolean = false;
+  confirmDialogVisible = false;
+pendingEvent: any = null;
+pendingValue: boolean = false;
 
   constructor(private eventsService: EventsService) {}
 
@@ -39,21 +49,85 @@ export class EventsListComponent implements OnInit {
       error: (err) => console.error('No events', err),
     });
   }
-
-  // expandAll() {
-  //   this.expandedRows = this.events.reduce((acc: { [x: string]: boolean }, p: { id: string | number }) => (acc[p.id] = true) && acc, {});
-  // }
-
-  // collapseAll() {
-  //   this.expandedRows = {};
-  // }
-
-  onRowExpand(event: TableRowExpandEvent) {
-    console.log('onRowExpand');
+  onCheckboxChange(event: Event, item: any) {
+    // Zapamiętaj obiekt i nową wartość, ale nie ustawiaj jej jeszcze
+    this.pendingEvent = item;
+    this.pendingValue = (event.target as HTMLInputElement).checked;
+  
+    // Otwórz okno potwierdzenia
+    this.visible = true;
+  
+    // Cofnij zaznaczenie checkboxa wizualnie — opcjonalne
+    (event.target as HTMLInputElement).checked = !this.pendingValue;
   }
 
-  onRowCollapse(event: TableRowCollapseEvent) {
-    console.log('onRowCollapse');
+  showDialog() {
+    this.visible = true;
+  }
+
+  confirmChange() {
+    if (this.pendingEvent) {
+      this.pendingEvent.acknowledged = this.pendingValue;
+    }
+    this.resetConfirmation();
+  }
+
+  cancelChange(event: any) {
+    // Nie zmieniaj modelu, tylko zamknij dialog
+    event.acknowledged = false;
+    this.resetConfirmation();
+  }
+  
+  resetConfirmation() {
+    this.visible = false;
+    this.pendingEvent = null;
+    this.pendingValue = false;
+  }
+
+  setEventAcknowledgedAsFalse(event: any) {
+    event.acknowledged = false;
+  }
+
+  get sortedEvents() {
+    if (!this.sortField) return this.events;
+
+    return [...this.events].sort((a, b) => {
+      const aVal = a[this.sortField];
+      const bVal = b[this.sortField];
+      if (aVal < bVal) return this.sortDirection === 'asc' ? -1 : 1;
+      if (aVal > bVal) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  sortBy(field: string) {
+    if (this.sortField === field) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortDirection = 'asc';
+    }
+  }
+
+  // onRowExpand(event: TableRowExpandEvent) {
+  //   console.log('onRowExpand');
+  // }
+
+  // onRowCollapse(event: TableRowCollapseEvent) {
+  //   console.log('onRowCollapse');
+  // }
+
+
+  toggleExpanded(event: any) {
+    if (this.expandedRows.has(event.id)) {
+      this.expandedRows.delete(event.id);
+    } else {
+      this.expandedRows.add(event.id);
+    }
+  }
+
+  isExpanded(event: any): boolean {
+    return this.expandedRows.has(event.id);
   }
 
   getRowClass(event: any): string {
@@ -64,17 +138,17 @@ export class EventsListComponent implements OnInit {
     return { '!bg-primary !text-primary-contrast': event.acknowledged === 'Fitness' };
 }
 
-  toggleRow(event: any) {
-    if (this.isRowExpanded(event)) {
-      delete this.expandedRows[event.id];
-    } else {
-      this.expandedRows[event.id] = event;
-    }
-  }
+  // toggleRow(event: any) {
+  //   if (this.isRowExpanded(event)) {
+  //     delete this.expandedRows[event.id];
+  //   } else {
+  //     this.expandedRows[event.id] = event;
+  //   }
+  // }
 
-  isRowExpanded(event: any): boolean {
-    return !!this.expandedRows[event.id];
-  }
+  // isRowExpanded(event: any): boolean {
+  //   return !!this.expandedRows[event.id];
+  // }
 
   openCloseDetailsComponent() {
     this.detailsOpen = !this.detailsOpen;
