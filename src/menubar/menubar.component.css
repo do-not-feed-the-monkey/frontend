@@ -15,13 +15,18 @@
 }
 
 .item-container {
+  height: 100px;
   display: flex; 
   justify-content: space-between;
 }
 
 .item {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 25px;
   max-height: 50px;
   text-align: center;
+  
 }
 
 ::ng-deep .p-button:disabled {

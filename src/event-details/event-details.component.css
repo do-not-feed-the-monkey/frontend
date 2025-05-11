@@ -9,12 +9,13 @@
     height: 400px;              /* Wysokość mapy (możesz dostosować) */
   }
 
-  ::ng-deep p-dialog {
-    width: 250px;
-  }
+  /* ::ng-deep p-dialog {
+    max-width: 350px;
+  } */
 
   .p-dialog {
-    width: 500px !important;
+    max-width: 300px !important;
+    min-width: 300px;
   }
 
   /* .container {
