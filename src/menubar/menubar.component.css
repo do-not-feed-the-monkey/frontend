@@ -1,3 +1,7 @@
+::ng-deep .p-button {
+  height: 100% !important;
+}
+
 .main-header {
   background-color: blue;
   height: 50px;
@@ -17,4 +21,46 @@
 
 .item {
   max-height: 50px;
+  text-align: center;
+}
+
+::ng-deep .p-button:disabled {
+  cursor: not-allowed;
+}
+
+.fadeInOut {
+  animation: fadeInOut 4s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0; /* zaczyna się jako niewidoczny */
+  }
+  50% {
+    opacity: 1; /* pełna widoczność w połowie cyklu */
+  }
+  100% {
+    opacity: 0; /* znika na końcu cyklu */
+  }
+}
+
+
+.fade-in-text p {
+  opacity: 0;
+  animation: fadeIn 3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.centered-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
 }

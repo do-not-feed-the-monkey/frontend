@@ -6,8 +6,17 @@
   <div class="item">
       <p-menubar [model]="items" />
   </div>
-  <div class="item" >
-    <p-button (click)="refreshPage()" label="Odśwież wydarzenia" icon="pi pi-refresh"></p-button>
+  <div class="item centered-text fadeInOut" *ngIf="isSearching">
+    <p>Wyszukiwanie nowych newsów...</p>
+  </div>
+  <div class="item">
+    <p-button 
+    class="h-full" 
+    (click)="refreshPage()" 
+    label="Odśwież wydarzenia" 
+    icon="pi pi-refresh"
+    [disabled]="isSearching">
+  </p-button>
   </div>
 
 </div>

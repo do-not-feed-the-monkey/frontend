@@ -24,7 +24,7 @@ export class EventsService {
   // }
 
   getEvents(): Observable<any>{// Events[]> {
-    return this.http.get<Events[]>('/api/events');
+    return this.http.get<Events[]>('http://134.199.189.23/api/events');
   }
 
   getEventDetailsById(id: number): Observable<Events> {

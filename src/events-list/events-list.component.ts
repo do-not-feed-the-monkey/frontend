@@ -36,12 +36,14 @@ export class EventsListComponent implements OnInit {
   confirmDialogVisible = false;
   pendingEvent: any = null;
   pendingValue: boolean = false;
+  expandedEventId: string | null = null;
 
   constructor(private eventsService: EventsService) {}
 
   ngOnInit(): void {
     this.eventsService.getEvents().subscribe({
       next: (data) => {
+        console.log('data', data);
         this.events = data.items;
       },
       error: (err) => console.error('No events', err),
@@ -87,6 +89,7 @@ export class EventsListComponent implements OnInit {
   }
 
   get sortedEvents() {
+    console.log('this.events', this.events);
     if (!this.sortField) return this.events;
 
     return [...this.events].sort((a, b) => {
@@ -107,17 +110,28 @@ export class EventsListComponent implements OnInit {
     }
   }
 
+  // toggleExpanded(event: any) {
+  //   if (this.expandedRows.has(event.id)) {
+  //     this.expandedRows.delete(event.id);
+  //   } else {
+  //     this.expandedRows.add(event.id);
+  //   }
+  // }
   toggleExpanded(event: any) {
-    if (this.expandedRows.has(event.id)) {
-      this.expandedRows.delete(event.id);
+    if (this.expandedEventId === event.id) {
+      this.expandedEventId = null; // zamknij, jeśli kliknięto ten sam
     } else {
-      this.expandedRows.add(event.id);
+      this.expandedEventId = event.id; // otwórz nowy, zamykając poprzedni
     }
   }
 
   isExpanded(event: any): boolean {
-    return this.expandedRows.has(event.id);
+    return this.expandedEventId === event.id;
   }
+
+  // isExpanded(event: any): boolean {
+  //   return this.expandedRows.has(event.id);
+  // }
 
   getRowClass(event: any): string {
     return event.acknowledged ? 'acknowledged-row' : '';
