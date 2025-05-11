@@ -4,10 +4,14 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 // import { ChartModule } from 'primeng/chart';
 import { CardModule } from 'primeng/card';
 import * as L from 'leaflet';
+import { ButtonModule } from 'primeng/button';
+import { Dialog } from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'event-details',
-  imports: [CommonModule, CardModule],
+  imports: [CommonModule, CardModule, ButtonModule, Dialog, FormsModule, TextareaModule],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.css'
 })
@@ -18,6 +22,7 @@ export class EventDetailsComponent implements OnInit, AfterViewInit {
   data: any;
   details: any;
   platformId = inject(PLATFORM_ID);
+  visible: boolean = false;
   constructor(
     private eventsService: EventsService,
     private cd: ChangeDetectorRef
@@ -25,8 +30,7 @@ export class EventDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // this.initChart();
-    console.log('NARAZIE NIC')
+ 
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.eventDetails = this.eventsService.getEventDetailsById(this.event.id).subscribe({
@@ -48,8 +52,15 @@ export class EventDetailsComponent implements OnInit, AfterViewInit {
       .openPopup();
   }
 
-  sendRequest() {
-    this.eventsService.sendEmptyPost(this.event.id);
+  showDialog() {
+    this.visible = true;
+  }
+
+  sendRequest(event:any): void {
+    this.eventsService.sendEmptyPost(this.event.id, event).subscribe({
+        next: res => console.log('Wysłano:', res),
+        error: err => console.error('Błąd:', err)
+      });
   }
 
   initChart() {

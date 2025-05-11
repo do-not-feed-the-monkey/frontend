@@ -31,8 +31,10 @@ export class EventsService {
     return this.http.get<Events>(`/api/events/${id}`);
   }
 
-  sendEmptyPost(id: number) {
-    return this.http.post<Events>(`/api/events/${id}`, {});
+  sendEmptyPost(id: number, event: any) {
+    return this.http.post<Events>(`/api/events/${id}`, {
+      description: event.description
+    });
   }
 }
 // {id}/ack

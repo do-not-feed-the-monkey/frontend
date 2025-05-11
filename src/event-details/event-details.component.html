@@ -5,14 +5,28 @@
       <p><strong>Opis:</strong> {{ event.description }}</p>
       <p><strong>Lokalizacja:</strong> {{ event.location }}</p>
     </ng-template>
+    <p-button severity="danger" class="custom-bordered-button" (click)="showDialog()">ZAKWESTIONUJ WYDARZENIE</p-button>
+    <p-dialog header="Edytuj" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+      <span class="p-text-secondary block mb-8">Zaktualizuj informacje</span>
+      <div class="flex items-center gap-4 mb-4">
+          <label for="username" class="font-semibold w-24">Username</label>
+          <input pInputText id="username" class="flex-auto" autocomplete="off" />
+      </div>
+      <div class="flex items-center gap-4 mb-8">
+          <textarea rows="5" cols="30" pTextarea  [(ngModel)]="event.description"></textarea>
+      </div>
+      <div class="flex justify-end gap-2">
+          <p-button label="Anuluj" severity="secondary" (click)="visible = false" />
+          <p-button label="Wyślij" (click)="visible = false; sendRequest(event)" />
+      </div>
+  </p-dialog>
   </p-card>
 
   <div class="map-container">
     <div id="map" style="height: 400px;width: 400px;"></div>
   </div>
  
-        <!-- <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]" /> -->
-        <!-- <button (click)="sendRequest()"></button> -->
+  
      
 
     
