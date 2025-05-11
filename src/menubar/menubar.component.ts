@@ -14,15 +14,15 @@ export class MenubarComponent {
   ngOnInit() {
       this.items = [
           {
-              label: 'Home',
+              label: 'Strona startowa',
               icon: 'pi pi-home'
           },
           {
-              label: 'Features',
+              label: 'Urząd',
               icon: 'pi pi-star'
           },
           {
-              label: 'Projects',
+              label: 'Wydarzenia',
               icon: 'pi pi-search',
               items: [
                   {
@@ -54,8 +54,8 @@ export class MenubarComponent {
               ]
           },
           {
-              label: 'Contact',
-              icon: 'pi pi-envelope'
+              label: '112',
+              icon: 'pi pi-phone'
           }
       ]
   }

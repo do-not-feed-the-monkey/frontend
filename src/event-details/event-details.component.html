@@ -9,7 +9,6 @@
     <p-dialog header="Edytuj" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
       <span class="p-text-secondary block mb-8">Zaktualizuj informacje</span>
       <div class="flex items-center gap-4 mb-4">
-          <label for="username" class="font-semibold w-24">Username</label>
           <input pInputText id="username" class="flex-auto" autocomplete="off" />
       </div>
       <div class="flex items-center gap-4 mb-8">
@@ -22,6 +21,11 @@
   </p-dialog>
   </p-card>
 
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <div style="width: 400px; display: flex; margin-top: 20px; justify-content: center;" class="p-card">
+      <label style="text-align: center;">Miejsce wystąpienia zdarzenia</label>
+    </div>
+  </div>
   <div class="map-container">
     <div id="map" style="height: 400px;width: 400px;"></div>
   </div>
