@@ -1,6 +1,20 @@
-<div class="container">
+<div class="main-header">
     <h2>CIVIL DEFENSE 42</h2>
 </div>
-<div >
-    <p-menubar [model]="items" />
+
+<div class="item-container">
+  <div class="item">
+      <p-menubar [model]="items" />
+  </div>
+  <div class="item" >
+    <p-button (click)="refreshPage()" label="Odśwież wydarzenia" icon="pi pi-refresh"></p-button>
+  </div>
+
 </div>
+
+<div *ngIf="isSearching" class="card" style="height: 6px;">
+  <p-progressbar mode="indeterminate" [style]="{'height': '6px'}"/>
+</div>
+  
+
+

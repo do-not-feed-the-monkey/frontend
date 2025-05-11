@@ -32,7 +32,7 @@ export class EventsService {
   }
 
   sendEmptyPost(id: number, event: any) {
-    return this.http.post<Events>(`/api/events/${id}`, {
+    return this.http.patch<Events>(`/api/events/${id}/ack`, {
       description: event.description
     });
   }

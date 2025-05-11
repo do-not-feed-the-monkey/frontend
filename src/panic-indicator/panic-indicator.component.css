@@ -1,0 +1,10 @@
+.tag-item {
+  display: flex;
+  align-items: center;      /* wertykalnie do środka */
+  justify-content: center; 
+}
+
+/* .p-tag-label {
+  text-align: center;
+  justify-content: center; 
+} */

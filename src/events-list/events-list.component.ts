@@ -13,10 +13,12 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Dialog } from 'primeng/dialog';
+import { PanicIndicatorComponent } from '../panic-indicator/panic-indicator.component';
 
 @Component({
   selector: 'events-list',
   imports: [ CommonModule, FormsModule, EventDetailsComponent, 
+    PanicIndicatorComponent,
     TableModule, TagModule, ToastModule, HttpClientModule,
     RatingModule,CheckboxModule, ButtonModule, Dialog
     ],
@@ -25,25 +27,21 @@ import { Dialog } from 'primeng/dialog';
   styleUrls: ['./events-list.component.css'],
 })
 export class EventsListComponent implements OnInit {
-  // events!: IEvent[];
-  // expandedRows: { [key: string]: boolean } = {};
   events: any = [];
   detailsOpen: boolean = false;
-
   expandedRows: Set<number> = new Set();
   sortField: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   visible: boolean = false;
   confirmDialogVisible = false;
-pendingEvent: any = null;
-pendingValue: boolean = false;
+  pendingEvent: any = null;
+  pendingValue: boolean = false;
 
   constructor(private eventsService: EventsService) {}
 
   ngOnInit(): void {
     this.eventsService.getEvents().subscribe({
       next: (data) => {
-        console.log('data', data);
         this.events = data.items;
       },
       error: (err) => console.error('No events', err),
@@ -108,15 +106,6 @@ pendingValue: boolean = false;
       this.sortDirection = 'asc';
     }
   }
-
-  // onRowExpand(event: TableRowExpandEvent) {
-  //   console.log('onRowExpand');
-  // }
-
-  // onRowCollapse(event: TableRowCollapseEvent) {
-  //   console.log('onRowCollapse');
-  // }
-
 
   toggleExpanded(event: any) {
     if (this.expandedRows.has(event.id)) {

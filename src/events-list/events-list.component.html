@@ -14,11 +14,13 @@
       <ng-container *ngFor="let event of sortedEvents">
         <tr [class.bg-green-100]="event.acknowledged" class="border-t">
           <td class="p-2 text-center">
-            <button (click)="toggleExpanded(event)">
+            <button
+            class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition duration-200 shadow-sm"
+             (click)="toggleExpanded(event)">
               {{ isExpanded(event) ? '▼' : '▶' }}
             </button>
           </td>
-          <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2">{{ event.weight }}</td>
+          <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2"><panic-indicator [eventSeverity]="event?.weight"></panic-indicator></td>
           <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2">{{ event.title }}</td>
           <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2">{{ event.createdAt }}</td>
           <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2">{{ event.description }}</td>

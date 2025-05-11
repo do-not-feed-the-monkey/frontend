@@ -5,10 +5,11 @@ import { Component } from '@angular/core';
 // import { MenubarModule } from 'primeng/menubar';
 import { MenubarComponent } from '../menubar/menubar.component';
 import { EventsListComponent } from '../events-list/events-list.component';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'dashboard',
-  imports: [MenubarComponent, EventsListComponent],
+  imports: [MenubarComponent, EventsListComponent, ButtonModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

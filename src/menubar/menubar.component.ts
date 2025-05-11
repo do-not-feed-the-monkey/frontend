@@ -1,15 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 import { Menubar } from 'primeng/menubar';
+import { ProgressBar } from 'primeng/progressbar';
 
 @Component({
   selector: 'menubar',
-  imports: [Menubar],
+  imports: [Menubar, CommonModule, ButtonModule, ProgressBar],
   templateUrl: './menubar.component.html',
   styleUrl: './menubar.component.css'
 })
 export class MenubarComponent {
   items: MenuItem[] | undefined;
+  isSearching:boolean = false;
 
   ngOnInit() {
       this.items = [
@@ -60,4 +64,10 @@ export class MenubarComponent {
       ]
   }
 
+  refreshPage() {
+    this.isSearching = true;
+    setTimeout(()=> {
+        this.isSearching = false;
+    }, 5000)
+  }
 }
