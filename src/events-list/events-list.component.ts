@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Dialog } from 'primeng/dialog';
 import { PanicIndicatorComponent } from '../panic-indicator/panic-indicator.component';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'events-list',
@@ -25,6 +26,19 @@ import { PanicIndicatorComponent } from '../panic-indicator/panic-indicator.comp
     standalone:true,
   templateUrl: './events-list.component.html',
   styleUrls: ['./events-list.component.css'],
+  animations: [
+    trigger('expandCollapse', [
+      // Zaczynamy animację w momencie wchodzenia (enter)
+      transition(':enter', [
+        style({ height: '0', opacity: 0 }), // Początkowa wysokość 0, przezroczystość 0
+        animate('300ms ease-out', style({ height: '*', opacity: 1 })) // Płynne rozwinięcie
+      ]),
+      // Animacja przy wychodzeniu (leave)
+      transition(':leave', [
+        animate('300ms ease-in', style({ height: '0', opacity: 0 })) // Płynne zwinięcie
+      ])
+    ])
+  ]
 })
 export class EventsListComponent implements OnInit {
   events: any = [];
@@ -36,28 +50,23 @@ export class EventsListComponent implements OnInit {
   confirmDialogVisible = false;
   pendingEvent: any = null;
   pendingValue: boolean = false;
-  expandedEventId: string | null = null;
+  expandedEvent: any = null;
 
   constructor(private eventsService: EventsService) {}
 
   ngOnInit(): void {
     this.eventsService.getEvents().subscribe({
       next: (data) => {
-        console.log('data', data);
         this.events = data.items;
       },
       error: (err) => console.error('No events', err),
     });
   }
   onCheckboxChange(event: Event, item: any) {
-    // Zapamiętaj obiekt i nową wartość, ale nie ustawiaj jej jeszcze
     this.pendingEvent = item;
     this.pendingValue = (event.target as HTMLInputElement).checked;
-  
-    // Otwórz okno potwierdzenia
     this.visible = true;
   
-    // Cofnij zaznaczenie checkboxa wizualnie — opcjonalne
     (event.target as HTMLInputElement).checked = !this.pendingValue;
   }
 
@@ -73,7 +82,6 @@ export class EventsListComponent implements OnInit {
   }
 
   cancelChange(event: any) {
-    // Nie zmieniaj modelu, tylko zamknij dialog
     event.acknowledged = false;
     this.resetConfirmation();
   }
@@ -89,7 +97,6 @@ export class EventsListComponent implements OnInit {
   }
 
   get sortedEvents() {
-    console.log('this.events', this.events);
     if (!this.sortField) return this.events;
 
     return [...this.events].sort((a, b) => {
@@ -110,28 +117,17 @@ export class EventsListComponent implements OnInit {
     }
   }
 
-  // toggleExpanded(event: any) {
-  //   if (this.expandedRows.has(event.id)) {
-  //     this.expandedRows.delete(event.id);
-  //   } else {
-  //     this.expandedRows.add(event.id);
-  //   }
-  // }
-  toggleExpanded(event: any) {
-    if (this.expandedEventId === event.id) {
-      this.expandedEventId = null; // zamknij, jeśli kliknięto ten sam
+  toggleExpanded(event: any): void {
+    if (this.expandedEvent === event) {
+      this.expandedEvent = null;
     } else {
-      this.expandedEventId = event.id; // otwórz nowy, zamykając poprzedni
+      this.expandedEvent = event;
     }
   }
 
   isExpanded(event: any): boolean {
-    return this.expandedEventId === event.id;
+    return this.expandedEvent === event;
   }
-
-  // isExpanded(event: any): boolean {
-  //   return this.expandedRows.has(event.id);
-  // }
 
   getRowClass(event: any): string {
     return event.acknowledged ? 'acknowledged-row' : '';
@@ -140,18 +136,6 @@ export class EventsListComponent implements OnInit {
   rowClass(event: any) {
     return { '!bg-primary !text-primary-contrast': event.acknowledged === 'Fitness' };
 }
-
-  // toggleRow(event: any) {
-  //   if (this.isRowExpanded(event)) {
-  //     delete this.expandedRows[event.id];
-  //   } else {
-  //     this.expandedRows[event.id] = event;
-  //   }
-  // }
-
-  // isRowExpanded(event: any): boolean {
-  //   return !!this.expandedRows[event.id];
-  // }
 
   openCloseDetailsComponent() {
     this.detailsOpen = !this.detailsOpen;

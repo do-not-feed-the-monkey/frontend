@@ -1,25 +1,36 @@
-<div >
-  <p-card header="{{ event.title }}" subheader="Utworzono: {{ event.createdAt }}">
-    <ng-template pTemplate="content">
-      <p><strong>Severity:</strong> {{ event.severity }}</p>
-      <p><strong>Opis:</strong> {{ event.description }}</p>
-      <p><strong>Lokalizacja:</strong> {{ event.location }}</p>
-    </ng-template>
-    <p-button severity="danger" class="custom-bordered-button" (click)="showDialog()">ZAKWESTIONUJ WYDARZENIE</p-button>
-    <p-dialog header="Edytuj" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-      <span class="p-text-secondary block mb-8">Zaktualizuj informacje</span>
-      <div class="flex items-center gap-4 mb-4">
-          <input pInputText id="username" class="flex-auto" autocomplete="off" />
+<div class="container">
+  <p-card header="{{ eventDetails.title }}" subheader="Utworzono: {{ event.createdAt }}">
+  
+      <div>
+        <p><strong>Opis:</strong> {{ eventDetails.description }}</p>
       </div>
-      <div class="flex items-center gap-4 mb-8">
-          <textarea rows="5" cols="30" pTextarea  [(ngModel)]="event.description"></textarea>
-      </div>
-      <div class="flex justify-end gap-2">
-          <p-button label="Anuluj" severity="secondary" (click)="visible = false" />
-          <p-button label="Wyślij" (click)="visible = false; sendRequest(event)" />
-      </div>
-  </p-dialog>
+  
+    <div *ngIf="eventDetails.expertComment">
+     <p><strong>Opinia eksperta:</strong></p>{{eventDetails.expertComment}}
+    </div>
+    <div *ngIf="eventDetails.expertComment">
+      <p-button severity="danger" class="custom-bordered-button" (click)="showDialog()">SKOMENTUJ WYDARZENIE</p-button>
+      <p-dialog header="Wiadomość" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+        <span class="p-text-secondary block mb-8">Podaj wiadomość do informacji publicznej</span>
+        <div class="flex items-center gap-4 mb-4">
+            <input pInputText id="username" class="flex-auto" autocomplete="off" />
+        </div>
+        <div class="flex items-center gap-4 mb-8">
+            <!-- <textarea rows="5" cols="30" pTextarea  [(ngModel)]="eventDetails.officialAnnouncement"></textarea> -->
+            <span>
+              {{eventDetails.officialAnnouncement}}
+            </span>
+          </div>
+        <div class="flex justify-end gap-2">
+            <p-button label="Anuluj" severity="secondary" (click)="visible = false" />
+            <p-button label="Wyślij" (click)="visible = false; sendRequest(event)" />
+        </div>
+      </p-dialog>
+    </div>
   </p-card>
+
+
+  </div>
 
   <div style="display: flex; justify-content: center; align-items: center;">
     <div style="width: 400px; display: flex; margin-top: 20px; justify-content: center;" class="p-card">
@@ -34,8 +45,4 @@
      
 
     
- 
-
-
-</div>
 

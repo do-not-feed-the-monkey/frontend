@@ -28,20 +28,21 @@ export class PanicIndicatorComponent {
     // }
     if (this.eventSeverity && this.eventSeverity === 0)  {
       this.severity="secondary";
-      this.severityValue = "Poziom niski";
+     
+      this.severityValue = this.eventSeverity.toString();
     }
     if (this.eventSeverity && this.eventSeverity >0 && this.eventSeverity < 5) {
       this.severity="info"; 
-      this.severityValue="Poziom ważny";
+      this.severityValue = this.eventSeverity.toString();
     }
-    if (this.eventSeverity && this.eventSeverity >= 5 && this.eventSeverity <=8) {
+    if (this.eventSeverity && this.eventSeverity >= 5 && this.eventSeverity <=7) {
       this.severity="warn";
-      this.severityValue="Poziom wysoki";
+      this.severityValue = this.eventSeverity.toString();
     }
 
-    if (this.eventSeverity && this.eventSeverity > 8) {
+    if (this.eventSeverity && this.eventSeverity > 7) {
       this.severity="danger";
-      this.severityValue="Poziom krytyczny";
+      this.severityValue = this.eventSeverity.toString();
     }
   }
 }

@@ -13,6 +13,7 @@ import { ChartModule } from 'primeng/chart';
 import { MenubarModule } from 'primeng/menubar';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MessageService } from 'primeng/api';
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     TableModule,    
     ButtonModule,  
     CheckboxModule, 

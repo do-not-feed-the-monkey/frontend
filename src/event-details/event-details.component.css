@@ -8,4 +8,23 @@
     width: 80%;                 /* Szerokość mapy (możesz dostosować) */
     height: 400px;              /* Wysokość mapy (możesz dostosować) */
   }
+
+  ::ng-deep p-dialog {
+    width: 250px;
+  }
+
+  .p-dialog {
+    width: 500px !important;
+  }
+
+  /* .container {
+    display: flex; 
+  }
+
+  .item-more-space {
+    flex-grow: 8;
+  }
+  .item-less-space {
+    flex-grow: 2;
+  } */
   

@@ -57,7 +57,7 @@ export class EventDetailsComponent implements OnInit, AfterViewInit {
   }
 
   sendRequest(event:any): void {
-    this.eventsService.sendEmptyPost(this.event.id, event).subscribe({
+    this.eventsService.sendEmptyPost(this.event.id, this.eventDetails).subscribe({
         next: res => console.log('Wysłano:', res),
         error: err => console.error('Błąd:', err)
       });

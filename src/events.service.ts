@@ -19,22 +19,17 @@ export class EventsService {
 
   constructor(private http: HttpClient) {}
 
-  // getEvents(): Observable<Events[]> {
-  //   return this.http.get<Events[]>(this.apiUrl);
-  // }
-
   getEvents(): Observable<any>{// Events[]> {
     return this.http.get<Events[]>('http://134.199.189.23/api/events');
   }
 
   getEventDetailsById(id: number): Observable<Events> {
-    return this.http.get<Events>(`/api/events/${id}`);
+    return this.http.get<Events>(`http://134.199.189.23/api/events/${id}`);
   }
 
   sendEmptyPost(id: number, event: any) {
-    return this.http.patch<Events>(`/api/events/${id}/ack`, {
+    return this.http.patch<Events>(`http://134.199.189.23/api/events/${id}/ack`, {
       description: event.description
     });
   }
 }
-// {id}/ack

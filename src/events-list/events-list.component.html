@@ -6,7 +6,7 @@
         <th class="p-2 cursor-pointer" (click)="sortBy('weight')">▲▼ Waga</th>
         <th class="p-2 cursor-pointer" (click)="sortBy('title')">Tytuł</th>
         <th class="p-2">▲▼ Czas utworzenia</th>
-        <th class="p-2 cursor-pointer" (click)="sortBy('description')">Wydarzenie</th>
+        <!-- <th class="p-2 cursor-pointer" (click)="sortBy('description')">Wydarzenie</th> -->
         <th class="p-2">▲▼ Status</th>
       </tr>
     </thead>
@@ -23,7 +23,7 @@
           <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2"><panic-indicator [eventSeverity]="event?.weight"></panic-indicator></td>
           <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2">{{ event.title }}</td>
           <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2">{{ event.createdAt }}</td>
-          <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2">{{ event.description }}</td>
+          <!-- <td [ngClass]="{ 'acknowledged-row': event.acknowledged }" class="p-2">{{ event.description }}</td> -->
           <td class="p-2">
             <input type="checkbox" [checked]="event.acknowledged" (change)="onCheckboxChange($event, event)"/>
             <p-dialog header="Potwierdzenie" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
@@ -37,7 +37,7 @@
           </p-dialog>
           </td>
         </tr>
-        <tr *ngIf="isExpanded(event)" class="bg-gray-50 text-gray-600">
+        <tr *ngIf="isExpanded(event)" @expandCollapse class="bg-gray-50 text-gray-600">
           <td colspan="7" class="p-2 border-t">
             <strong>Expanded for {{ event.title }}</strong>
             <event-details [event]="event"></event-details>
